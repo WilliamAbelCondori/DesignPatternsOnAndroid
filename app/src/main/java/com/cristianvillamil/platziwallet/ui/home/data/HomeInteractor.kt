@@ -1,11 +1,12 @@
 package com.cristianvillamil.platziwallet.ui.home.data
 
+import android.os.Handler
 import com.cristianvillamil.platziwallet.ui.home.FavoriteTransfer
 import com.cristianvillamil.platziwallet.ui.home.HomeContract
 
 class HomeInteractor {
     //este es el que se encarga de la comunicación
-    fun retrieveFavoriteTransferFromCache(responseCallback: HomeContract.OnResponseCallback){
+    fun retrieveFavoriteTransferFromCache(responseCallback: HomeContract.OnResponseCallback) {
         val items = ArrayList<FavoriteTransfer>()
         items.add(
             FavoriteTransfer(
@@ -53,6 +54,10 @@ class HomeInteractor {
             )
         )
 
-        responseCallback.onResponse(items)
+        val runnable = Runnable {
+            responseCallback.onResponse(items)
+        }
+        val handler = Handler()
+        handler.postDelayed(runnable, 3000)
     }
 }
