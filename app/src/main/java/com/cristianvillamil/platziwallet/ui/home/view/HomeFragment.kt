@@ -17,8 +17,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(), HomeContract.View {
 
-    private val favoriteTransferAdapter =
-        FavoriteTransferAdapter()
+    private val favoriteTransferAdapter = FavoriteTransferAdapter()
 
     private var homePresenter: HomeContract.Presenter? = null
 
@@ -58,11 +57,11 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun showLoader() {
-        homeLoader.visibility=View.VISIBLE
+        homeLoader.visibility = View.VISIBLE
     }
 
     override fun hideLoader() {
-        homeLoader.visibility=View.GONE
+        homeLoader.visibility = View.GONE
     }
 
     override fun showFavoriteTransfers(favoriteTransfer: List<FavoriteTransfer>) {
