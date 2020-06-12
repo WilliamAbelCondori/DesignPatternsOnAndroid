@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cristianvillamil.platziwallet.R
@@ -16,7 +17,6 @@ import com.cristianvillamil.platziwallet.ui.home.data.MessageFactory
 import com.cristianvillamil.platziwallet.ui.home.data.MessageFactory.Companion.TYPE_ERROR
 import com.cristianvillamil.platziwallet.ui.home.presenter.HomePresenter
 import com.cristianvillamil.platziwallet.ui.observable.AvailableBalanceObservable
-import com.cristianvillamil.platziwallet.ui.observable.Observer
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -57,12 +57,16 @@ class HomeFragment : Fragment(), HomeContract.View {
 
 
         // implementamos directamente desde este envento
-        availableBalanceObservable.addObserver(object : Observer{
+        /*availableBalanceObservable.addObserver(object : Observer{
             override fun notifyChange(newValue: Double) {
                 amountValueTextView.text = "$ $newValue"
             }
 
+        })*/
+        homePresenter!!.getPercentageLiveData().observe(this, Observer<String> { value ->
+            percentageText.text = value
         })
+
     }
 
     private fun initRecyclerView() {
@@ -83,10 +87,10 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun showFavoriteTransfers(favoriteTransfer: List<FavoriteTransfer>) {
         favoriteTransferAdapter.setData(favoriteTransfer)
-        val dialogFactory= MessageFactory()
-        context?.let {
-            val errorDialog = dialogFactory.getDialog(it, TYPE_ERROR)
-            errorDialog.show()
-        }
+        /* val dialogFactory= MessageFactory()
+         context?.let {
+             val errorDialog = dialogFactory.getDialog(it, TYPE_ERROR)
+             errorDialog.show()
+         }*/
     }
 }
