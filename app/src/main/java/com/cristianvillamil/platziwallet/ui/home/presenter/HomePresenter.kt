@@ -13,7 +13,7 @@ class HomePresenter(private val view: HomeContract.View) : HomeContract.Presente
         view.showLoader()
         homeInteractor.retrieveFavoriteTransferFromCache(object : HomeContract.OnResponseCallback {
             override fun onResponse(favoriteTransfer: List<FavoriteTransfer>) {
-                UserSingleton.getInstance().userName="Hola"
+                //UserSingleton.getInstance().userName="Hola"
 
                 val user = User.Builder()
                     .setUserName("Hola")
