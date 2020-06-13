@@ -9,9 +9,12 @@ import androidx.room.RoomDatabase
 @Database(entities = [TransferEntity::class], version = 1)
 abstract class ApplicationDatabase : RoomDatabase(){
 
+    // declaramos una funcion abstracta para poder obtener la instancias de nuestro
+    // DAO y de esa manera realizamos operaciones con nuestra base de datos
     abstract fun getDAO():TransferDAO
 
     companion object {
+        // Singleton
         private var INSTANCE: ApplicationDatabase? = null
 
         fun getAppDatabase(context: Context) : ApplicationDatabase?{
